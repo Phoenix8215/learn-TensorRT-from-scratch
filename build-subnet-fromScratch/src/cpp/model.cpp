@@ -32,12 +32,14 @@ public:
     virtual void log (Severity severity, const char* msg) noexcept override{
         string str;
         switch (severity){
-            case Severity::kINTERNAL_ERROR: str = RED    "[fatal]" CLEAR; break;
-            case Severity::kERROR:          str = RED    "[error]" CLEAR; break;
-            case Severity::kWARNING:        str = BLUE   "[warn]"  CLEAR; break;
-            case Severity::kINFO:           str = YELLOW "[info]"  CLEAR; break;
-            case Severity::kVERBOSE:        str = PURPLE "[verb]"  CLEAR; break;
+            case Severity::kINTERNAL_ERROR: str = RED    "[fatal]: " CLEAR; break;
+            case Severity::kERROR:          str = RED    "[error]: " CLEAR; break;
+            case Severity::kWARNING:        str = BLUE   "[warn]: "  CLEAR; break;
+            case Severity::kINFO:           str = YELLOW "[info]: "  CLEAR; break;
+            case Severity::kVERBOSE:        str = PURPLE "[verb]: "  CLEAR; break;
         }
+        if (severity <= Severity::kINFO)
+            cout << str << string(msg) << endl;
     }
 };
 
